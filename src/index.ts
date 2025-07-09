@@ -7,10 +7,13 @@ const startHubStatsJob = async (hfToken: string) => {
 		throw new Error("HF_TOKEN is not set");
 	}
 
+	console.log("Starting Hub Stats Job");
+
 	const response = await fetch("https://huggingface.co/api/jobs/cfahlgren1", {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
+			"Authorization": `Bearer ${hfToken}`,
 		},
 		body: JSON.stringify({
 			dockerImage: "ghcr.io/astral-sh/uv:python3.11-bookworm",
@@ -19,6 +22,7 @@ const startHubStatsJob = async (hfToken: string) => {
 				"-c",
 				'uv run https://huggingface.co/datasets/cfahlgren1/job-scripts/raw/main/hub-stats.py'
 			],
+			environment: {},
 			secrets: {
 				HF_TOKEN: hfToken,
 			},

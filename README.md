@@ -2,6 +2,20 @@
 
 Triggering an Hugging Face Job via Cloudflare Cron.
 
+## Setup
+
+### Install Wrangler
+
+```bash
+npm i -D wrangler@latest
+```
+
+### Set HF_TOKEN Secret
+
+```bash
+echo "hf_xxxx" | npx wrangler secret put HF_TOKEN
+```
+
 ## Configuration
 
 ### wrangler.jsonc
@@ -38,6 +52,12 @@ export default {
     }
   },
 };
+```
+
+## Deploy
+
+```bash
+npx wrangler deploy
 ```
 
 ## Resources
